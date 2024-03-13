@@ -2,12 +2,13 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeStackNavigator from './src/navigator/navigation';
-
+import OfflineNotice from './src/components/OfflineNotice';
 const App = () => {
   return (
    
       <NavigationContainer>
         <HomeStackNavigator />
+        <OfflineNotice />
       </NavigationContainer>
     
   );

@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, Text } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import { View, StyleSheet, Text, Dimensions } from 'react-native';
+import MapView, { Marker, Polyline } from 'react-native-maps';
 
-const MapComponent = ({ onSelectRide, nearbyRideRequests, currentLocation }) => {
+const MapComponent = ({ onSelectRide, nearbyRideRequests, currentLocation, selectedRide }) => {
   const handleMarkerPress = (ride) => {
     onSelectRide(ride);
   };
@@ -27,6 +27,16 @@ const MapComponent = ({ onSelectRide, nearbyRideRequests, currentLocation }) => 
             title="Driver"
             description="Driver's current location"
           />
+          {selectedRide && (
+            <Polyline
+              coordinates={[
+                { latitude: selectedRide.pickupLocation.latitude, longitude: selectedRide.pickupLocation.longitude },
+                { latitude: selectedRide.destination.latitude, longitude: selectedRide.destination.longitude },
+              ]}
+              strokeColor="#000" 
+              strokeWidth={6}
+            />
+          )}
           {nearbyRideRequests.length === 0 ? (
             <Text style={styles.noRideRequestsText}>No nearby ride requests</Text>
           ) : (

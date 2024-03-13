@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Dimensions, Alert, Text, TouchableOpacity } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import MapComponent from '../components/MapComponents';
 import RideDetailsComponent from '../components/RideDetailsComponent';
 
 const MapScreen = () => {
-  //   const { setDriverLocation, setNearbyRideRequests, setRideStatus, driverLocation, nearbyRideRequests, rideStatus } = props;
   const [currentLocation, setCurrentLocation] = useState(null);
   const [nearbyRideRequests, setNearbyRideRequests] = useState([]);
   const [selectedRide, setSelectedRide] = useState(null);
@@ -49,8 +47,22 @@ const MapScreen = () => {
       try {
         const dummyRideRequests = currentLocation
           ? [
-              { id: 1231, name: 'John Wilbert', userId: 'user1', status: 'Pending', pickupLocation: { latitude: currentLocation.latitude + 0.01, longitude: currentLocation.longitude + 0.01 } },
-              { id: 552342, name: 'qweng qweng', userId: 'user2', status: 'Pending', pickupLocation: { latitude: currentLocation.latitude - 0.02, longitude: currentLocation.longitude + 0.02 } },
+              {
+                id: 1231,
+                name: 'John Wilbert',
+                userId: 'user1',
+                status: 'Pending',
+                pickupLocation: { latitude: currentLocation.latitude + 0.02, longitude: currentLocation.longitude + 0.02 },
+                destination: { latitude: currentLocation.latitude + 0.03, longitude: currentLocation.longitude + 0.03 }
+              },
+              {
+                id: 552342,
+                name: 'Wil',
+                userId: 'user2',
+                status: 'Pending',
+                pickupLocation: { latitude: currentLocation.latitude + 0.01, longitude: currentLocation.longitude + 0.01 },
+                destination: { latitude: currentLocation.latitude + 0.01, longitude: currentLocation.longitude + 0.01 }
+              },
             ]
           : [];
 
@@ -114,5 +126,3 @@ const MapScreen = () => {
 };
 
 export default MapScreen;
-// export default connect(mapStateToProps, mapDispatchToProps)(MapScreen);
-
